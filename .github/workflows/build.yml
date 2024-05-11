@@ -9,16 +9,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows-2022
-            arch: x64
-            gen_short_name: "vs17_2022"
-            gen_cmake_name: "Visual Studio 17 2022"
-
-          - os: windows-2022
-            arch: Win32
-            gen_short_name: "vs17_2022"
-            gen_cmake_name: "Visual Studio 17 2022"
-
           - os: ubuntu-22.04
             arch: x64
             cc: gcc
@@ -203,10 +193,10 @@ jobs:
         name: "Build ${{ github.event.client_payload.commit_hash_short }}"
         body: "This is the build of commit [${{ github.event.client_payload.commit_hash_short }}](https://codeberg.org/csprite/csprite/commit/${{ github.event.client_payload.commit_hash }})."
         tag: "${{ github.event.client_payload.commit_hash }}"
-        commit: false
+        commit: "${{ github.event.client_payload.commit_hash }}"
         prerelease: true
         allowUpdates: true
-        generateReleaseNotes: true
+        generateReleaseNotes: false
         artifactErrorsFailBuild: true
         artifacts: |
           ./csprite-win-x64.exe
