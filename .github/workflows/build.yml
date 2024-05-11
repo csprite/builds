@@ -179,7 +179,6 @@ jobs:
       with:
         name: "Build ${{ github.event.client_payload.commit_hash_short }}"
         body: "This is the build of commit [${{ github.event.client_payload.commit_hash_short }}](https://codeberg.org/csprite/csprite/commit/${{ github.event.client_payload.commit_hash }})."
-        tag: "${{ github.event.client_payload.commit_hash }}"
         commit: "${{ github.event.client_payload.commit_hash }}"
         prerelease: true
         allowUpdates: true
