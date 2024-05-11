@@ -9,6 +9,16 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: windows-2022
+            arch: x64
+            gen_short_name: "vs17_2022"
+            gen_cmake_name: "Visual Studio 17 2022"
+
+          - os: windows-2022
+            arch: Win32
+            gen_short_name: "vs17_2022"
+            gen_cmake_name: "Visual Studio 17 2022"
+
           - os: ubuntu-22.04
             arch: x64
             cc: gcc
@@ -141,6 +151,16 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:
+        name: win-x64
+        path: ./win-x64/
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: win-Win32
+        path: ./win-Win32/
+
+    - uses: actions/download-artifact@v3
+      with:
         name: linux-x64
         path: ./linux-x64/
 
@@ -161,6 +181,9 @@ jobs:
 
     - name: Rename
       run: |
+        mv ./win-x64/csprite.exe ./csprite-win-x64.exe
+        mv ./win-Win32/csprite.exe ./csprite-win-x86.exe
+
         mv ./linux-x64/csprite ./csprite-linux-x64
         mv ./linux-x32/csprite ./csprite-linux-x32
 
@@ -186,6 +209,8 @@ jobs:
         generateReleaseNotes: false
         artifactErrorsFailBuild: true
         artifacts: |
+          ./csprite-win-x64.exe
+          ./csprite-win-x86.exe
           ./csprite-linux-x64
           ./csprite-linux-x32
           ./csprite-osx-arm64.zip
