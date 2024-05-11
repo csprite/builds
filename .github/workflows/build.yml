@@ -190,12 +190,18 @@ jobs:
         mv ./osx-arm64/csprite.zip ./csprite-osx-arm64.zip
         mv ./osx-x86_64/csprite.zip ./csprite-osx-x64.zip
 
+    - uses: dev-drprasad/delete-older-releases@v0.3.3
+      with:
+        keep_latest: 10
+        delete_tags: true
+        delete_prerelease_only: true
+
     - uses: ncipollo/release-action@v1
       with:
-        name: "Csprite Latest Git"
-        body: "this release is not for daily use."
-        tag: "latest-git"
-        commit: "master"
+        name: "Build ${{ github.event.client_payload.commit_hash_short }}"
+        body: "This is the build of commit [${{ github.event.client_payload.commit_hash_short }}](https://codeberg.org/csprite/csprite/commit/${{ github.event.client_payload.commit_hash }})."
+        tag: "${{ github.event.client_payload.commit_hash }}"
+        commit: false
         prerelease: true
         allowUpdates: true
         generateReleaseNotes: true
