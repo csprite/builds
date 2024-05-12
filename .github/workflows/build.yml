@@ -201,7 +201,7 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         name: "Build ${{ github.event.client_payload.commit_hash_short }}"
-        body: "This is the build of commit [${{ github.event.client_payload.commit_hash_short }}](https://codeberg.org/csprite/csprite/commit/${{ github.event.client_payload.commit_hash }})."
+        body: "This is the build of commit [${{ github.event.client_payload.commit_hash_short }}](https://codeberg.org/csprite/csprite/commit/${{ github.event.client_payload.commit_hash }}).\n> ${{ github.event.client_payload.commit_message }}"
         tag: "${{ github.event.client_payload.commit_hash_short }}"
         commit: "master"
         prerelease: true
